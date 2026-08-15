@@ -131,6 +131,37 @@ const savingsPoints = [
   ["No neighborhood markup", "We quote the condition and complexity of your home, not what we think your ZIP code can afford."],
 ];
 
+const processSteps = [
+  {
+    number: "01",
+    title: "Inspect",
+    copy: "We examine the roof or siding, document what we see, and identify the real source of the problem.",
+    image: "/process-inspect.webp?v=2",
+    imageAlt: "Roofing professional safely inspecting shingles and flashing",
+  },
+  {
+    number: "02",
+    title: "Explain",
+    copy: "You get plain-English findings, practical options, and the reasoning behind each recommendation.",
+    image: "/process-explain.webp?v=2",
+    imageAlt: "Roofing contractor reviewing inspection findings with a homeowner",
+  },
+  {
+    number: "03",
+    title: "Build",
+    copy: "We protect the property, complete the agreed scope, and keep the worksite organized along the way.",
+    image: "/process-build.webp?v=2",
+    imageAlt: "Roofing crew completing an organized residential installation",
+  },
+  {
+    number: "04",
+    title: "Verify",
+    copy: "We review the finished work, clean the site, and close the job only after the scope is complete.",
+    image: "/process-verify.webp?v=2",
+    imageAlt: "Roofing professional completing a final quality walkthrough",
+  },
+];
+
 export default function Home() {
   return (
     <main>
@@ -256,15 +287,30 @@ export default function Home() {
       </section>
 
       <section className="savings" id="savings">
-        <div className="shell savings-grid">
-          <div className="savings-copy">
-            <p className="eyebrow light"><span /> Quality you can afford</p>
-            <h2>The price should be <em>budget.</em><br />The work shouldn&apos;t be.</h2>
-            <p>
-              Low price and good work are not opposites. The real difference is how a contractor runs the business,
-              explains the scope, and helps you spend money where it protects the home.
-            </p>
-            <div className="quote-stripe">We quote the work—not the neighborhood.</div>
+        <div className="shell">
+          <div className="savings-top">
+            <div className="savings-copy">
+              <p className="eyebrow light"><span /> Quality you can afford</p>
+              <h2>The price should be <em>budget.</em><br />The work shouldn&apos;t be.</h2>
+              <p>
+                Low price and good work are not opposites. The real difference is how a contractor runs the business,
+                explains the scope, and helps you spend money where it protects the home.
+              </p>
+              <div className="quote-stripe">We quote the work—not the neighborhood.</div>
+            </div>
+            <figure className="savings-photo">
+              <img
+                src={sitePath("/savings-consultation.webp?v=2")}
+                alt="Roofing contractor reviewing a practical inspection and estimate with a homeowner"
+                width="1536"
+                height="1024"
+                loading="lazy"
+              />
+              <figcaption>
+                <span>Free inspection • Clear scope</span>
+                <strong>Facts first.<br />Pressure never.</strong>
+              </figcaption>
+            </figure>
           </div>
           <div className="savings-points">
             {savingsPoints.map(([title, copy], index) => (
@@ -279,21 +325,24 @@ export default function Home() {
 
       <section className="process" id="process">
         <div className="shell">
-          <div className="center-heading">
-            <p className="eyebrow"><span /> Simple from the start</p>
-            <h2>No pressure. No guessing.<br /><em>Four clear steps.</em></h2>
+          <div className="process-heading">
+            <div>
+              <p className="eyebrow"><span /> Simple from the start</p>
+              <h2>No pressure. No guessing.<br /><em>Four clear steps.</em></h2>
+            </div>
+            <p>Every stage has a purpose, a clear next step, and someone you can call. You always know what we found, what comes next, and why.</p>
           </div>
           <div className="process-grid">
-            {[
-              ["01", "Inspect", "We examine the roof or siding, document what we see, and identify the real source of the problem."],
-              ["02", "Explain", "You get plain-English findings, practical options, and the reasoning behind each recommendation."],
-              ["03", "Build", "We protect the property, complete the agreed scope, and keep the worksite organized along the way."],
-              ["04", "Verify", "We review the finished work, clean the site, and close the job only after the scope is complete."],
-            ].map(([number, title, copy]) => (
-              <article key={number}>
-                <div className="process-icon"><span>{number}</span></div>
-                <h3>{title}</h3>
-                <p>{copy}</p>
+            {processSteps.map((step) => (
+              <article key={step.number}>
+                <div className="process-media">
+                  <img src={sitePath(step.image)} alt={step.imageAlt} width="1536" height="1024" loading="lazy" />
+                  <span>{step.number}</span>
+                </div>
+                <div className="process-card-copy">
+                  <h3>{step.title}</h3>
+                  <p>{step.copy}</p>
+                </div>
               </article>
             ))}
           </div>
