@@ -6,12 +6,63 @@ function sitePath(path: string) {
   return `${basePath}${path}`;
 }
 
-const services = [
-  ["01", "Residential Roofing", "Protection built around your home, budget, and long-term plans."],
-  ["02", "Roof Repair", "Targeted repairs that solve the problem without overselling the solution."],
-  ["03", "Roof Replacement", "A clear, well-managed replacement with practical material options."],
-  ["04", "Insurance Claims", "Photo documentation and scope support from inspection through completion."],
-  ["05", "Siding", "Durable siding that improves curb appeal, comfort, and weather protection."],
+type ServiceCard = {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  position?: string;
+  brand?: boolean;
+};
+
+const services: ServiceCard[] = [
+  {
+    id: "residential-roofing",
+    number: "01",
+    title: "Residential Roofing",
+    description: "Protection built around your home, budget, and long-term plans.",
+    image: "/budget-roofing-siding-logo.png",
+    alt: "Budget Roofing and Siding logo",
+    brand: true,
+  },
+  {
+    id: "roof-repair",
+    number: "02",
+    title: "Roof Repair",
+    description: "Targeted repairs that solve the problem without overselling the solution.",
+    image: "/service-roof-repair.webp",
+    alt: "Roofing professional repairing asphalt shingles",
+    position: "48% center",
+  },
+  {
+    id: "roof-replacement",
+    number: "03",
+    title: "Roof Replacement",
+    description: "A clear, well-managed replacement with practical material options.",
+    image: "/service-roof-replacement.webp",
+    alt: "Roofing crew installing a new asphalt shingle roof",
+    position: "57% center",
+  },
+  {
+    id: "insurance-claims",
+    number: "04",
+    title: "Insurance Claims",
+    description: "Photo documentation and scope support from inspection through completion.",
+    image: "/service-insurance-claims.webp",
+    alt: "Roofing specialist reviewing storm damage with a homeowner",
+    position: "61% center",
+  },
+  {
+    id: "siding",
+    number: "05",
+    title: "Siding",
+    description: "Durable siding that improves curb appeal, comfort, and weather protection.",
+    image: "/service-siding.webp",
+    alt: "Home finished with new blue siding and white trim",
+    position: "center",
+  },
 ];
 
 const serviceDetails = [
@@ -131,12 +182,28 @@ export default function Home() {
             <span>One reliable team from the first inspection to the final cleanup.</span>
           </div>
           <div className="service-grid">
-            {services.map(([number, title, description]) => (
-              <a className="service-card" href={`#${title.toLowerCase().replaceAll(" ", "-")}`} key={title}>
-                <span>{number}</span>
-                <h2>{title}</h2>
-                <p>{description}</p>
-                <b aria-hidden="true">↗</b>
+            {services.map((service) => (
+              <a
+                className={`service-card${service.brand ? " service-card-brand" : ""}`}
+                href={`#${service.id}`}
+                key={service.id}
+              >
+                <div className="service-card-media">
+                  <img
+                    src={sitePath(service.image)}
+                    alt={service.alt}
+                    width="1536"
+                    height="1024"
+                    loading="lazy"
+                    style={{ objectPosition: service.position }}
+                  />
+                </div>
+                <span className="service-card-number">{service.number}</span>
+                <b className="service-card-arrow" aria-hidden="true">↗</b>
+                <div className="service-card-content">
+                  <h2>{service.title}</h2>
+                  <p>{service.description}</p>
+                </div>
               </a>
             ))}
           </div>
