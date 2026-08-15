@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://budgetroofingandsiding.com"),
   title: "Budget Roofing & Siding",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     images: [{ url: "/budget-roofing-siding-logo.png", width: 1400, height: 530, alt: "Budget Roofing and Siding — Quality You Can Afford" }],
   },
   alternates: { canonical: "/" },
-  icons: { icon: "/favicon.png", shortcut: "/favicon.png", apple: "/favicon.png" },
+  icons: { icon: `${assetBasePath}/favicon.png`, shortcut: `${assetBasePath}/favicon.png`, apple: `${assetBasePath}/favicon.png` },
   other: { "codex-preview": "development" },
 };
 

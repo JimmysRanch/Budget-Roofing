@@ -4,6 +4,12 @@ import { getServiceArea, serviceAreas } from "../../site-data";
 
 type AreaPageProps = { params: Promise<{ slug: string }> };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function sitePath(path: string) {
+  return `${basePath}${path}`;
+}
+
 export function generateStaticParams() {
   return serviceAreas.map((area) => ({ slug: area.slug }));
 }
@@ -38,17 +44,17 @@ export default async function ServiceAreaPage({ params }: AreaPageProps) {
         <a href="tel:+12102698380">Call 210.269.8380 <span aria-hidden="true">→</span></a>
       </div>
       <header className="location-header shell">
-        <a className="wordmark" href="/" aria-label="Budget Roofing and Siding home">
-          <img className="site-logo location-logo" src="/budget-roofing-siding-logo.png" alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
+        <a className="wordmark" href={sitePath("/")} aria-label="Budget Roofing and Siding home">
+          <img className="site-logo location-logo" src={sitePath("/budget-roofing-siding-logo.png")} alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
         </a>
-        <nav><a href="/#services">Services</a><a href="/#areas">All service areas</a></nav>
+        <nav><a href={sitePath("/#services")}>Services</a><a href={sitePath("/#areas")}>All service areas</a></nav>
         <a className="button button-small phone-button" href="tel:+12102698380">210.269.8380</a>
       </header>
 
       <section className="location-hero">
         <div className="shell location-hero-grid">
           <div>
-            <p className="location-breadcrumb"><a href="/">Home</a><span>/</span><a href="/#areas">Service areas</a><span>/</span>{area.name}</p>
+            <p className="location-breadcrumb"><a href={sitePath("/")}>Home</a><span>/</span><a href={sitePath("/#areas")}>Service areas</a><span>/</span>{area.name}</p>
             <p className="eyebrow light"><span /> Roofing contractor serving {area.name}</p>
             <h1>Roofing &amp; siding<br />in <em>{area.name}.</em></h1>
             <p className="location-lead">
@@ -57,7 +63,7 @@ export default async function ServiceAreaPage({ params }: AreaPageProps) {
             </p>
             <div className="hero-actions">
               <a className="button yellow-button" href="tel:+12102698380">Call 210.269.8380 <span aria-hidden="true">↗</span></a>
-              <a className="location-text-link" href="/#services">Explore services ↓</a>
+              <a className="location-text-link" href={sitePath("/#services")}>Explore services ↓</a>
             </div>
           </div>
           <div className="location-value-box">
@@ -96,7 +102,7 @@ export default async function ServiceAreaPage({ params }: AreaPageProps) {
               ["Insurance claims", "Visible-damage documentation and construction-scope coordination.", "/#insurance-claims"],
               ["Siding", "Exterior repair and replacement options built around durability and curb appeal.", "/#siding"],
             ].map(([title, copy, href], index) => (
-              <a href={href} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b aria-hidden="true">↗</b></a>
+              <a href={sitePath(href)} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b aria-hidden="true">↗</b></a>
             ))}
           </div>
         </div>
@@ -118,8 +124,8 @@ export default async function ServiceAreaPage({ params }: AreaPageProps) {
         <div className="shell nearby-grid">
           <div><p className="eyebrow light"><span /> Nearby service areas</p><h2>Also serving communities near {area.name}.</h2></div>
           <div className="nearby-links">
-            {nearby.map((candidate) => <a href={`/service-areas/${candidate.slug}`} key={candidate.slug}>{candidate.name}<span aria-hidden="true">↗</span></a>)}
-            <a className="all-areas-link" href="/#areas">View all 35 areas <span aria-hidden="true">→</span></a>
+            {nearby.map((candidate) => <a href={sitePath(`/service-areas/${candidate.slug}`)} key={candidate.slug}>{candidate.name}<span aria-hidden="true">↗</span></a>)}
+            <a className="all-areas-link" href={sitePath("/#areas")}>View all 35 areas <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -135,7 +141,7 @@ export default async function ServiceAreaPage({ params }: AreaPageProps) {
 
       <footer>
         <div className="shell footer-top location-footer-top">
-          <a className="wordmark" href="/" aria-label="Budget Roofing and Siding home"><img className="site-logo footer-logo" src="/budget-roofing-siding-logo.png" alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" /></a>
+          <a className="wordmark" href={sitePath("/")} aria-label="Budget Roofing and Siding home"><img className="site-logo footer-logo" src={sitePath("/budget-roofing-siding-logo.png")} alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" /></a>
           <p>Quality you can afford. Roofing and siding across Greater San Antonio.</p>
           <a className="footer-domain" href="tel:+12102698380">210.269.8380 ↗</a>
         </div>

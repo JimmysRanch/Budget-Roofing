@@ -1,5 +1,11 @@
 import { areaGroups, serviceAreas } from "./site-data";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function sitePath(path: string) {
+  return `${basePath}${path}`;
+}
+
 const services = [
   ["01", "Residential Roofing", "Protection built around your home, budget, and long-term plans."],
   ["02", "Roof Repair", "Targeted repairs that solve the problem without overselling the solution."],
@@ -69,7 +75,7 @@ export default function Home() {
 
       <header className="site-header shell">
         <a className="wordmark" href="#top" aria-label="Budget Roofing and Siding home">
-          <img className="site-logo" src="/budget-roofing-siding-logo.png" alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
+          <img className="site-logo" src={sitePath("/budget-roofing-siding-logo.png")} alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
         </a>
         <nav aria-label="Main navigation">
           <a href="#services">Services</a>
@@ -102,7 +108,7 @@ export default function Home() {
         <div className="hero-visual" aria-label="Budget Roofing and Siding brand">
           <div className="brand-image-wrap">
             <img
-              src="/budget-roofing-siding-logo.png"
+              src={sitePath("/budget-roofing-siding-logo.png")}
               alt="Budget Roofing and Siding — Quality You Can Afford"
               width="1400"
               height="530"
@@ -223,7 +229,7 @@ export default function Home() {
                 </header>
                 <div className="area-links">
                   {group.areas.map(([name, slug]) => (
-                    <a href={`/service-areas/${slug}`} key={slug}><span>{name}</span><b aria-hidden="true">↗</b></a>
+                    <a href={sitePath(`/service-areas/${slug}`)} key={slug}><span>{name}</span><b aria-hidden="true">↗</b></a>
                   ))}
                 </div>
               </section>
@@ -299,7 +305,7 @@ export default function Home() {
       <footer>
         <div className="shell footer-top">
           <a className="wordmark wordmark-dark" href="#top" aria-label="Budget Roofing and Siding home">
-            <img className="site-logo footer-logo" src="/budget-roofing-siding-logo.png" alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
+            <img className="site-logo footer-logo" src={sitePath("/budget-roofing-siding-logo.png")} alt="Budget Roofing and Siding — Quality You Can Afford" width="1400" height="530" />
           </a>
           <p>Quality you can afford. Roofing and siding across Greater San Antonio.</p>
           <a className="footer-domain" href="tel:+12102698380">210.269.8380 ↗</a>
