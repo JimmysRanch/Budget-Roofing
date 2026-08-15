@@ -17,7 +17,7 @@ npm ci
 npm run prepare:pages
 ```
 
-The generated contents of `pages-root/` are published at the repository root while the application source remains in `app/`. The preparation step moves Next.js assets out of the reserved `_next` folder so the repository's legacy Pages builder does not remove the site's styles or scripts.
+The generated contents of `pages-root/` are published at the repository root while the application source remains in `app/`. The preparation step adds a Jekyll configuration that explicitly includes Next.js's `_next` folder so the repository's legacy Pages builder preserves the site's styles and scripts.
 
 ## Sites development
 

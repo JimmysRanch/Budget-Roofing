@@ -13,7 +13,6 @@ if (!targetRoot.startsWith(`${projectRoot}${sep}`)) {
 await stat(sourceRoot);
 await rm(targetRoot, { recursive: true, force: true });
 
-const textExtensions = new Set([".css", ".html", ".js", ".json", ".svg", ".xml"]);
 let fileCount = 0;
 
 async function publishDirectory(directory) {
@@ -27,36 +26,22 @@ async function publishDirectory(directory) {
     if (extname(entry.name) === ".txt") continue;
 
     const sourceRelativePath = relative(sourceRoot, sourcePath);
-    const publishedRelativePath = sourceRelativePath.startsWith(`_next${sep}`)
-      ? join("assets", sourceRelativePath.slice(`_next${sep}`.length))
-      : sourceRelativePath;
-    const targetPath = join(targetRoot, publishedRelativePath);
+    const targetPath = join(targetRoot, sourceRelativePath);
 
     await mkdir(dirname(targetPath), { recursive: true });
-
-    if (textExtensions.has(extname(entry.name))) {
-      const source = await readFile(sourcePath, "utf8");
-      const rewritten = source.replaceAll(
-        `${publishedBasePath}/_next/`,
-        `${publishedBasePath}/assets/`,
-      );
-      await writeFile(targetPath, rewritten);
-    } else {
-      await cp(sourcePath, targetPath);
-    }
+    await cp(sourcePath, targetPath);
 
     fileCount += 1;
   }
 }
 
 await publishDirectory(sourceRoot);
+await writeFile(join(targetRoot, "_config.yml"), "include:\n  - _next\n");
+fileCount += 1;
 
 const homepage = await readFile(join(targetRoot, "index.html"), "utf8");
-if (homepage.includes(`${publishedBasePath}/_next/`)) {
-  throw new Error("Homepage still contains an unpublished _next asset path.");
-}
-if (!homepage.includes(`${publishedBasePath}/assets/`)) {
-  throw new Error("Homepage does not contain the remapped Pages asset path.");
+if (!homepage.includes(`${publishedBasePath}/_next/`)) {
+  throw new Error("Homepage does not contain the expected Next.js asset path.");
 }
 
 console.log(`Prepared ${fileCount} GitHub Pages files in pages-root/.`);
