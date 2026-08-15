@@ -10,12 +10,14 @@ It is a public marketing website. It has no account system, ChatGPT login, or pr
 
 ## GitHub Pages
 
-Every push to `main` runs `.github/workflows/deploy-pages.yml`, builds a static copy with the correct `/Budget-Roofing/` path, and deploys the `out/` artifact to GitHub Pages.
+GitHub Pages serves the prebuilt public website from the root of `main`. This works with the repository's legacy Pages configuration and does not require a GitHub Actions runner.
 
 ```bash
 npm ci
 npm run build:pages
 ```
+
+The generated contents of `out/` are published at the repository root while the application source remains in `app/`.
 
 ## Sites development
 
