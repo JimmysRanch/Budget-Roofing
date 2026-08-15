@@ -14,10 +14,10 @@ GitHub Pages serves the prebuilt public website from the root of `main`. This wo
 
 ```bash
 npm ci
-npm run build:pages
+npm run prepare:pages
 ```
 
-The generated contents of `out/` are published at the repository root while the application source remains in `app/`.
+The generated contents of `pages-root/` are published at the repository root while the application source remains in `app/`. The preparation step moves Next.js assets out of the reserved `_next` folder so the repository's legacy Pages builder does not remove the site's styles or scripts.
 
 ## Sites development
 
