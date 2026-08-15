@@ -188,19 +188,23 @@ a { color: inherit; text-decoration: none; }
 .service-details { background: var(--paper); }
 .service-row {
   scroll-margin-top: 24px;
-  min-height: 480px;
+  min-height: 560px;
   display: grid;
-  grid-template-columns: .52fr 1.28fr .9fr;
+  grid-template-columns: 1.04fr 1.22fr .9fr;
   align-items: center;
-  gap: 64px;
-  padding-block: 78px;
+  gap: clamp(38px, 4.4vw, 62px);
+  padding-block: 88px;
   border-bottom: 1px solid var(--line);
 }
-.service-row-reverse { grid-template-columns: .9fr 1.28fr .52fr; }
-.service-row-reverse .service-number { order: 3; text-align: right; }
+.service-row-reverse { grid-template-columns: .9fr 1.22fr 1.04fr; }
+.service-row-reverse .service-photo { order: 3; box-shadow: -12px 12px 0 var(--red); }
+.service-row-reverse .service-photo span { right: -12px; left: auto; border-right: 7px solid var(--red); border-left: 0; }
 .service-row-reverse .service-copy { order: 2; }
 .service-row-reverse .service-list { order: 1; }
-.service-number { color: transparent; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: clamp(120px, 13vw, 190px); font-weight: 700; line-height: .8; -webkit-text-stroke: 2px #d8d3ca; }
+.service-photo { position: relative; align-self: stretch; min-height: 365px; max-height: 420px; overflow: visible; background: var(--ink); box-shadow: 12px 12px 0 var(--red); }
+.service-photo::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.2); pointer-events: none; }
+.service-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.service-photo span { position: absolute; top: -12px; left: -12px; min-width: 66px; height: 58px; display: grid; place-items: center; padding-inline: 13px; border-left: 7px solid var(--red); background: var(--yellow); color: var(--ink); font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 24px; line-height: 1; box-shadow: 5px 5px 0 var(--ink); }
 .service-copy h2 { margin: 0; max-width: 650px; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: clamp(42px, 4vw, 61px); line-height: 1.02; text-transform: uppercase; }
 .service-copy > p:not(.eyebrow) { margin: 23px 0 0; max-width: 630px; color: #5d5c59; font-size: 14px; line-height: 1.85; }
 .service-copy small { display: block; margin-top: 14px; color: #797875; font-size: 10px; line-height: 1.5; }
@@ -365,9 +369,8 @@ footer { padding: 64px 0 24px; background: #08080a; color: var(--white); }
   .hero-visual { min-height: 470px; }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card:last-child { grid-column: span 2; }
-  .service-row, .service-row-reverse { grid-template-columns: .45fr 1.1fr .9fr; gap: 34px; }
-  .service-row-reverse .service-number { order: 0; text-align: left; }
-  .service-row-reverse .service-copy, .service-row-reverse .service-list { order: 0; }
+  .service-row { grid-template-columns: .86fr 1.1fr .9fr; gap: 34px; }
+  .service-row-reverse { grid-template-columns: .9fr 1.1fr .86fr; }
   .savings-grid, .area-heading, .faq-grid, .contact-grid { grid-template-columns: 1fr; }
   .area-heading { gap: 30px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
@@ -406,7 +409,9 @@ footer { padding: 64px 0 24px; background: #08080a; color: var(--white); }
   .service-card, .service-card:last-child { grid-column: auto; min-height: 320px; }
   .service-card-brand .service-card-media img { max-width: 420px; padding-inline: 36px; }
   .service-row, .service-row-reverse { min-height: 0; grid-template-columns: 1fr; gap: 28px; padding-block: 70px; }
-  .service-number, .service-row-reverse .service-number { order: 0; text-align: left; font-size: 100px; }
+  .service-photo, .service-row-reverse .service-photo { order: 0; min-height: 265px; max-height: none; box-shadow: 8px 8px 0 var(--red); }
+  .service-row-reverse .service-photo span { right: auto; left: -6px; border-right: 0; border-left: 6px solid var(--red); }
+  .service-photo span { top: -8px; left: -6px; min-width: 60px; height: 52px; font-size: 21px; box-shadow: 4px 4px 0 var(--ink); }
   .service-copy, .service-row-reverse .service-copy { order: 0; }
   .service-list, .service-row-reverse .service-list { order: 0; }
   .savings, .process, .area-section, .faq-section, .contact-section { padding-block: 82px; }

@@ -70,6 +70,9 @@ const serviceDetails = [
     id: "residential-roofing",
     number: "01",
     label: "Residential",
+    image: "/service-detail-residential.webp",
+    imageAlt: "San Antonio home with a newly completed architectural shingle roof",
+    imagePosition: "center",
     title: "Residential roofing built around your home—not a sales quota.",
     copy: "From older homes inside Loop 410 to newer builds across the Hill Country, we inspect the whole roof system and recommend the option that makes practical and financial sense.",
     items: ["Roof condition inspections", "Shingle and metal options", "Ventilation and flashing review", "Straightforward written scope"],
@@ -78,6 +81,9 @@ const serviceDetails = [
     id: "roof-repair",
     number: "02",
     label: "Roof repair",
+    image: "/service-detail-roof-repair.webp",
+    imageAlt: "Roofing professional completing a detailed flashing repair",
+    imagePosition: "center",
     title: "Fix the failure. Protect the rest. Skip the unnecessary replacement.",
     copy: "A leak does not automatically mean you need a new roof. We trace the source, explain what failed, and price the repair before recommending anything larger.",
     items: ["Leak and moisture tracing", "Missing or lifted shingles", "Flashing and roof penetrations", "Storm and wind damage"],
@@ -86,6 +92,9 @@ const serviceDetails = [
     id: "roof-replacement",
     number: "03",
     label: "Roof replacement",
+    image: "/service-detail-roof-replacement.webp",
+    imageAlt: "Finished architectural shingle roof on a San Antonio home",
+    imagePosition: "center",
     title: "A clean replacement plan with no mystery in the middle.",
     copy: "When replacement is the right call, you get clear material choices, a defined installation scope, jobsite protection, and a final walkthrough before we call it complete.",
     items: ["Repair-versus-replace comparison", "Material and color guidance", "Decking condition review", "Magnetic cleanup and walkthrough"],
@@ -94,6 +103,9 @@ const serviceDetails = [
     id: "insurance-claims",
     number: "04",
     label: "Roof insurance claims",
+    image: "/service-detail-insurance-claims.webp",
+    imageAlt: "Roofing specialist documenting hail damage on asphalt shingles",
+    imagePosition: "center",
     title: "Strong documentation when the weather turns into paperwork.",
     copy: "We help document visible storm damage, organize the construction scope, and coordinate the roofing side of the process so you can make informed decisions with your carrier.",
     items: ["Photo-documented inspection", "Damage and scope review", "Adjuster meeting coordination", "Restoration planning"],
@@ -103,6 +115,9 @@ const serviceDetails = [
     id: "siding",
     number: "05",
     label: "Siding",
+    image: "/service-detail-siding.webp",
+    imageAlt: "Craftsman installing fiber cement siding and exterior trim",
+    imagePosition: "center",
     title: "Curb appeal that also works harder for your home.",
     copy: "Repair damaged sections or transform the exterior with a complete siding plan designed around durability, maintenance, appearance, and your actual budget.",
     items: ["Siding repair and replacement", "Fiber-cement and vinyl options", "Trim, soffit, and fascia", "Weather-damage restoration"],
@@ -214,7 +229,17 @@ export default function Home() {
         <div className="shell">
           {serviceDetails.map((service, index) => (
             <article className={`service-row ${index % 2 ? "service-row-reverse" : ""}`} id={service.id} key={service.id}>
-              <div className="service-number" aria-hidden="true">{service.number}</div>
+              <div className="service-photo">
+                <img
+                  src={sitePath(service.image)}
+                  alt={service.imageAlt}
+                  width="1536"
+                  height="1024"
+                  loading="lazy"
+                  style={{ objectPosition: service.imagePosition }}
+                />
+                <span aria-hidden="true">{service.number}</span>
+              </div>
               <div className="service-copy">
                 <p className="eyebrow"><span /> {service.label}</p>
                 <h2>{service.title}</h2>
